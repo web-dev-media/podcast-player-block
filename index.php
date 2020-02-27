@@ -4,7 +4,7 @@ namespace wppgb;
  * Plugin Name: Wordpress Podcast Player Gutenberg Block
  * Plugin URI: https://github.com/web-dev-media/wordpress-podcast-player-gutenberg-block
  * Description: This is a plugin provides a Podcast PLayer as Gutenber block
- * Version: 1.1.0-53f40ef3065b
+ * Version: 1.1.0-40ffbb4c8b42
  * Author: web dev media UG (haftungsbeschränkt) <info@web-dev-media.de>
  *
  * @package wordpress-podcast-player-gutenberg-block
@@ -34,13 +34,13 @@ function register_block() {
 	);
 
 }
-add_action( 'init', 'register_block' );
+add_action( 'init', __NAMESPACE__ . '\register_block' );
 
 
 function enqueue_assets() {
 	$assetsPath = '/assets/dist/';
 
-	foreach (glob(get_stylesheet_directory() . $assetsPath . '*/*.bundle.*.js') as $i => $assetFile) {
+	foreach (glob(untrailingslashit(plugin_dir_path(__FILE__) ) . $assetsPath . '*/*.bundle.*.js') as $i => $assetFile) {
 
 		$assetPathInfo   = pathinfo($assetFile);
 		$assetFile       = basename($assetFile);
@@ -52,20 +52,20 @@ function enqueue_assets() {
 		}
 
 		$file = $assetsPath . $version . '/' . $assetFile;
-		wp_enqueue_script(BLOCK_HANDLE . '-editor', get_stylesheet_directory_uri() . $file, ($i > 0 ? $assetsHandles : NULL), NULL, FALSE);
+		wp_enqueue_script(BLOCK_HANDLE . '-editor', untrailingslashit(plugin_dir_url(__FILE__)) . $file, ($i > 0 ? $assetsHandles : NULL), NULL, FALSE);
 
 
 		wp_add_inline_script(
-			BLOCK_HANDLE,
+			BLOCK_HANDLE . '-editor',
 			'wp.' . BLOCK_HANDLE . ' = '  . json_encode([
-				                                            'blockName' => BLOCK_NAME_SPACE,
-				                                            'rest_base' => 'BF_TAXONOMIE_REST_BASE',
-				                                            'title' => BLOCK_NAME_SPACE,
-				                                            'category' => 'common',
-				                                            'icon' => 'tickets',
-				                                            'namespace' => BLOCK_HANDLE . '_js',
-				                                            'pathInfo' => plugin_dir_url(__FILE__)
-			                                            ]),
+			        'blockName' => BLOCK_NAME_SPACE,
+			        'rest_base' => 'REST_BASE',
+			        'title' => BLOCK_NAME_SPACE,
+			        'category' => 'common',
+			        'icon' => 'tickets',
+			        'namespace' => BLOCK_HANDLE . '_js',
+			        'pathInfo' => plugin_dir_url(__FILE__)
+			    ]),
 			'before'
 		);
 	}
