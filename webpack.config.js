@@ -9,6 +9,7 @@ const log = require('signale');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const hash = require( 'object-hash' );
 const fs = require('fs');
+const externals = require( './assets/js/externals' );
 require('dotenv').config();
 
 module.exports = async (env, argv) => {
@@ -28,7 +29,7 @@ module.exports = async (env, argv) => {
 
   fs.readFile( path.resolve(__dirname, 'index.php'), 'utf8', (err, data) => {
     if (err) throw err;
-    data = new Uint8Array(Buffer.from(data.replace(/Version: (.*?)-.*?\n/g, 'Version: $1-' + version + '\n')));
+    data = new Uint8Array(Buffer.from(data.replace(/Version: (.*?)(-.*?)?\n/g, 'Version: $1-' + version + '\n')));
     fs.writeFile(path.resolve(__dirname, 'index.php'), data, (err) => {
       if (err) throw err;
       console.log('index.php version updated.' );
@@ -91,6 +92,7 @@ module.exports = async (env, argv) => {
     watchOptions: {
       ignored: /node_modules/,
     },
+    externals: externals,
     module: {
       rules: [
         {
