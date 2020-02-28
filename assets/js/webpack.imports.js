@@ -1,3 +1,1 @@
-import(/* webpackChunkName: "block-index" */'./index.js');
-
-console.log('s');
+import(/* webpackChunkName: "podcast-player-block-index" */'./block/index.js');

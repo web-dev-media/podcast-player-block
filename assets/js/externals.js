@@ -1,5 +1,5 @@
 /**
- * Utility methods for use when generating build configuration objects.
+ * Utility solve generating builds with WordPress dependencies configuration objects.
  */
 const { join } = require( 'path' );
 
@@ -30,6 +30,7 @@ const externals = [
 	'utils',
 	'date',
 	'data',
+	'icons',
 	'i18n'
 ].reduce(
 	( externals, name ) => ( {

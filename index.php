@@ -4,7 +4,7 @@ namespace wppgb;
  * Plugin Name: Wordpress Podcast Player Gutenberg Block
  * Plugin URI: https://github.com/web-dev-media/wordpress-podcast-player-gutenberg-block
  * Description: This is a plugin provides a Podcast PLayer as Gutenber block
- * Version: 1.1.0-40ffbb4c8b42
+ * Version: 1.1.0-0b70e931b681
  * Author: web dev media UG (haftungsbeschränkt) <info@web-dev-media.de>
  *
  * @package wordpress-podcast-player-gutenberg-block
@@ -12,7 +12,7 @@ namespace wppgb;
 
 defined( 'ABSPATH' ) || exit;
 define( 'BLOCK_HANDLE', __NAMESPACE__ );
-define( 'BLOCK_NAME_SPACE', BLOCK_HANDLE . '/movies' );
+define( 'BLOCK_NAME_SPACE', BLOCK_HANDLE . '/player' );
 
 
 /**
@@ -52,17 +52,21 @@ function enqueue_assets() {
 		}
 
 		$file = $assetsPath . $version . '/' . $assetFile;
-		wp_enqueue_script(BLOCK_HANDLE . '-editor', untrailingslashit(plugin_dir_url(__FILE__)) . $file, ($i > 0 ? $assetsHandles : NULL), NULL, FALSE);
+		wp_enqueue_script(BLOCK_HANDLE . '-editor', untrailingslashit(plugin_dir_url(__FILE__)) . $file, [
+			'wp-block-editor',
+			'wp-blocks',
+			'wp-element',
+			'wp-i18n',
+			'wp-polyfill'
+		], NULL, FALSE);
 
 
 		wp_add_inline_script(
 			BLOCK_HANDLE . '-editor',
-			'wp.' . BLOCK_HANDLE . ' = '  . json_encode([
+			'wp.globalBlockMetas.' . BLOCK_HANDLE . ' = '  . json_encode([
 			        'blockName' => BLOCK_NAME_SPACE,
 			        'rest_base' => 'REST_BASE',
 			        'title' => BLOCK_NAME_SPACE,
-			        'category' => 'common',
-			        'icon' => 'tickets',
 			        'namespace' => BLOCK_HANDLE . '_js',
 			        'pathInfo' => plugin_dir_url(__FILE__)
 			    ]),
