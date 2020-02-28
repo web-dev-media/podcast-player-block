@@ -31,6 +31,8 @@ const externals = [
 	'date',
 	'data',
 	'icons',
+	'blob',
+	'compose',
 	'i18n'
 ].reduce(
 	( externals, name ) => ( {

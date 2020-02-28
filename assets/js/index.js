@@ -9,11 +9,11 @@ import { InnerBlocks } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import deprecated from './deprecated';
-import edit from './edit';
+import deprecated from './block/deprecated';
+import edit from './block/edit';
 import localBlockMetadata from './block/blockMeta.json';
-import save from './save';
-import transforms from './transforms';
+import save from './block/save';
+import transforms from './block/transforms';
 
 const blockNamespace = 'wppgb';
 const blockName = blockNamespace + '/player';
