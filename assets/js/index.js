@@ -1,61 +1,26 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { gallery as icon } from '@wordpress/icons';
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
  */
-import deprecated from './audio-player/deprecated';
 import edit from './audio-player/edit';
-import localBlockMetadata from './audio-player/blockMeta.json';
 import save from './audio-player/save';
-import transforms from './audio-player/transforms';
+import meta from './audio-player/meta';
+import attributes from './audio-player/attributes';
+import deprecated from './audio-player/deprecated';
+import migration from './audio-player/migration';
 
-const blockNamespace = 'wppgb';
-const blockName = blockNamespace + '/player';
-const { globalBlockMetas } = wp;
+const { audio_block_meta } = wp;
 
-if(globalBlockMetas['blockNamespace'] && localBlockMetadata){
-	localBlockMetadata.name = blockName;
-}
+Object.assign(audio_block_meta, meta);
 
-console.log({localBlockMetadata, globalBlockMetas});
+audio_block_meta.edit = edit;
+audio_block_meta.save = save;
+audio_block_meta.attributes = attributes;
+audio_block_meta.deprecated = deprecated;
+audio_block_meta.migration = migration;
 
-
-
-/*
-
-registerBlockType( wppgb.blockName, {
-	title: wppgb.title,
-	category: wppgb.category,
-	icon: wppgb.icon,
-	description: __( 'Display multiple images in a rich gallery.' ),
-	example: {
-		attributes: {
-			content: __(
-			  'In a village of La Mancha, the name of which I have no desire to call to mind, there lived not long since one of those gentlemen that keep a lance in the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.'
-			),
-			customFontSize: 28,
-			dropCap: true,
-		},
-	},
-	edit: ( { className } ) => {
-		return (
-			<div className={ className }>
-				<InnerBlocks />
-			</div>
-		);
-	},
-	save: ( { className } ) => {
-		return (
-			<div className={ className } >
-				<InnerBlocks.Content />
-			</div>
-		);
-	},
-} );
-*/
+registerBlockType( audio_block_meta.namespace, audio_block_meta);

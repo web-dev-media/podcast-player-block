@@ -1,18 +1,19 @@
 <?php
-namespace wppgb;
 /**
  * Plugin Name: Wordpress Podcast Player Gutenberg Block
  * Plugin URI: https://github.com/web-dev-media/wordpress-podcast-player-gutenberg-block
  * Description: This is a plugin provides a Podcast PLayer as Gutenber block
- * Version: 1.1.0-800baef8286f
+ * Version: 1.1.0-ceef2906ec8c
  * Author: web dev media UG (haftungsbeschränkt) <info@web-dev-media.de>
  *
  * @package wordpress-podcast-player-gutenberg-block
  */
 
+namespace wppgb;
+
 defined( 'ABSPATH' ) || exit;
 define( 'BLOCK_HANDLE', __NAMESPACE__ );
-define( 'BLOCK_NAME_SPACE', BLOCK_HANDLE . '/player' );
+define( 'BLOCK_NAMESPACE', BLOCK_HANDLE . '/player' );
 
 
 /**
@@ -63,11 +64,10 @@ function enqueue_assets() {
 
 		wp_add_inline_script(
 			BLOCK_HANDLE . '-editor',
-			'wp.globalBlockMetas.' . BLOCK_HANDLE . ' = '  . json_encode([
-			        'blockName' => BLOCK_NAME_SPACE,
+			'wp.audio_block_meta = ' . json_encode([
+			        'name' => BLOCK_HANDLE,
+			        'namespace' => BLOCK_NAMESPACE,
 			        'rest_base' => 'REST_BASE',
-			        'title' => BLOCK_NAME_SPACE,
-			        'namespace' => BLOCK_HANDLE . '_js',
 			        'pathInfo' => plugin_dir_url(__FILE__)
 			    ]),
 			'before'

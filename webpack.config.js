@@ -9,7 +9,7 @@ const log = require('signale');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const hash = require( 'object-hash' );
 const fs = require('fs');
-const externals = require( './assets/js/externals' );
+const externals = require( './assets/js/helper/externals' );
 require('dotenv').config();
 
 module.exports = async (env, argv) => {

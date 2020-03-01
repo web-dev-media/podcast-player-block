@@ -1,12 +1,13 @@
-/**
+/*
+/!**
  * WordPress dependencies
- */
+ *!/
 import { __ } from '@wordpress/i18n';
 import { audio as icon } from '@wordpress/icons';
 
-/**
+/!**
  * Internal dependencies
- */
+ *!/
 import deprecated from './deprecated';
 import edit from './edit';
 import metadata from './blockMeta.json';
@@ -35,3 +36,4 @@ export const settings = {
 	edit,
 	save,
 };
+*/
