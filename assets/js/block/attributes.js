@@ -8,14 +8,6 @@ const attributes = {
 		"selector": "audio",
 		"attribute": "src"
 	},
-	"caption": {
-		"type": "string",
-		"source": "html",
-		"selector": "figcaption"
-	},
-	"id": {
-		"type": "number"
-	},
 	"autoplay": {
 		"type": "boolean",
 		"source": "attribute",

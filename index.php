@@ -28,7 +28,7 @@ function register_block() {
 	}
 
 	register_block_type(
-		BLOCK_NAME_SPACE,
+		BLOCK_NAMESPACE,
 		[
 			'editor_script' => BLOCK_HANDLE . '-editor',
 		]

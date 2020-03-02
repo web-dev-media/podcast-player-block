@@ -6,12 +6,12 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import edit from './audio-player/edit';
-import save from './audio-player/save';
-import meta from './audio-player/meta';
-import attributes from './audio-player/attributes';
-import deprecated from './audio-player/deprecated';
-import migration from './audio-player/migration';
+import edit from './block/edit';
+import save from './block/save';
+import meta from './block/meta';
+import attributes from './block/attributes';
+import deprecated from './block/deprecated';
+import migration from './block/migration';
 
 const { audio_block_meta } = wp;
 
